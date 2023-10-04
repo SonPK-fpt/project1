@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { search } from "./BooksAPI";
+import { getAll, search } from "./BooksAPI";
 import BookComponent from "./Book";
 
 const SearchBookComponent = () => {
@@ -20,24 +20,26 @@ const SearchBookComponent = () => {
 
       const query = textSearch;
 
-      const res = await search(textSearch, Math.max);
+      await Promise.all([getAll(), search(textSearch, Math.max)]).then(
+        (allBook) => {
+          if (!Array.isArray(allBook[1])) {
+            setBooks("");
+            return;
+          }
 
-      if (!Array.isArray(res)) {
-        setBooks("");
-        return;
-      }
+          if (query === textSearch) {
+            const result = allBook[1].map((book) => {
+              const value = allBook[0].find((value) => value.id === book.id);
+              return {
+                ...book,
+                shelf: value ? value.shelf : "none",
+              };
+            });
 
-      if (query === textSearch) {
-        const result = res.map((book) => {
-          const value = res.find((value) => value.id === book.id);
-          return {
-            ...value,
-            shelf: value.shelf !== undefined ? value.shelf : "none",
-          };
-        });
-
-        setBooks(result);
-      }
+            setBooks(result);
+          }
+        }
+      );
     };
     getBooks();
   }, [textSearch]);
