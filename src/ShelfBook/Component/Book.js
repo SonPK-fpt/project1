@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { update } from "./BooksAPI";
+import { update } from "../../BooksAPI";
 
-const BookComponent = ({ book, setReloadPage }) => {
+const Book = ({ book, setReloadPage }) => {
   const [shelf, setShelf] = useState(book.shelf);
 
   const handleChangeShelf = async (e) => {
@@ -54,4 +54,4 @@ const BookComponent = ({ book, setReloadPage }) => {
   );
 };
 
-export default BookComponent;
+export default Book;

@@ -1,6 +1,6 @@
-import BookComponent from "./Book";
+import Book from "./Book";
 
-const ShelfBookComponent = ({ books, titleShelf, setReloadPage }) => {
+const Shelf = ({ books, titleShelf, setReloadPage }) => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{titleShelf}</h2>
@@ -9,7 +9,7 @@ const ShelfBookComponent = ({ books, titleShelf, setReloadPage }) => {
           <ol className="books-grid">
             {books.map((book) => (
               <li key={book.id}>
-                <BookComponent book={book} setReloadPage={setReloadPage} />
+                <Book book={book} setReloadPage={setReloadPage} />
               </li>
             ))}
           </ol>
@@ -19,4 +19,4 @@ const ShelfBookComponent = ({ books, titleShelf, setReloadPage }) => {
   );
 };
 
-export default ShelfBookComponent;
+export default Shelf;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAll } from "./BooksAPI";
-import ShelfBookComponent from "./ShelfBook";
+import { getAll } from "../BooksAPI";
+import Shelf from "./Component/Shelf";
 
 const ShelfList = [
   {
@@ -18,7 +18,7 @@ const ShelfList = [
   },
 ];
 
-const HomeBookComponent = () => {
+const Home = () => {
   const [reloadPage, setReloadPage] = useState(true);
   const [allBook, setAllBook] = useState([]);
 
@@ -41,15 +41,15 @@ const HomeBookComponent = () => {
       <div className="list-books-content">
         {allBook && (
           <div>
-            {ShelfList.map((Shelf, index) => {
+            {ShelfList.map((shelf, index) => {
               const books = allBook.filter(
-                (books) => books.shelf === Shelf.value
+                (books) => books.shelf === shelf.value
               );
               return (
-                <ShelfBookComponent
+                <Shelf
                   key={index}
                   books={books}
-                  titleShelf={Shelf.title}
+                  titleShelf={shelf.title}
                   setReloadPage={setReloadPage}
                 />
               );
@@ -64,4 +64,4 @@ const HomeBookComponent = () => {
   );
 };
 
-export default HomeBookComponent;
+export default Home;

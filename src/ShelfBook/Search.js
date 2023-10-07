@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAll, search } from "./BooksAPI";
-import BookComponent from "./Book";
+import { getAll, search } from "../BooksAPI";
+import Book from "./Component/Book";
 
-const SearchBookComponent = () => {
+const Search = () => {
   const [books, setBooks] = useState(null);
   const [textSearch, setTextSearch] = useState("");
 
@@ -66,7 +66,7 @@ const SearchBookComponent = () => {
           {books &&
             books.map((book) => (
               <li key={book.id}>
-                <BookComponent book={book} />
+                <Book book={book} />
               </li>
             ))}
         </ol>
@@ -75,4 +75,4 @@ const SearchBookComponent = () => {
   );
 };
 
-export default SearchBookComponent;
+export default Search;
